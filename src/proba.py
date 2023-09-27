@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 # Step 1: Read the Data
-with open("prizes.txt", "r") as file:
+with open("prizes.txt", "r", encoding="utf-8") as file:
     data = file.read().splitlines()
 
 # Step 2: Count the Frequency
@@ -13,7 +13,9 @@ for prize in data:
         prize_frequency[prize] = 1
 
 # Step 3: Sort the Prizes by Frequency (in descending order)
-sorted_prizes = dict(sorted(prize_frequency.items(), key=lambda item: item[1], reverse=True))
+sorted_prizes = dict(
+    sorted(prize_frequency.items(), key=lambda item: item[1], reverse=True)
+)
 
 # Step 4: Create the Chart
 plt.figure(figsize=(10, 6))
@@ -30,5 +32,5 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # Save the chart as an image or display it
-plt.savefig("prize_frequency_chart.png")  # Save as an image
+plt.savefig("data/prize_frequency_chart.png")  # Save as an image
 # plt.show()  # Display the chart in a window (comment out if saving as image)

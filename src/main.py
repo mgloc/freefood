@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 
-# Customs
+# Selenium functions
 def find_element_by_class_name(browser: webdriver.Chrome, class_name: str):
     return browser.find_element(By.XPATH, f"//div[@class='{class_name}']")
 
@@ -18,7 +18,6 @@ def find_elements_by_class_name(browser: webdriver.Chrome, class_name: str):
     return browser.find_elements(By.XPATH, f"//div[@class='{class_name}']")
 
 
-# Mains functions
 def get_browser(headless: bool = True) -> webdriver.Chrome:
     ## Setup chrome options
     chrome_options = Options()
@@ -28,12 +27,17 @@ def get_browser(headless: bool = True) -> webdriver.Chrome:
 
     # Set path to chromebrowser as per your configuration
     homedir = os.path.expanduser("~")
-    driver_service = Service(f"{homedir}/chromedriver/chromedriver-linux64/chromedriver")
+    driver_service = Service(
+        f"{homedir}/chromedriver/chromedriver-linux64/chromedriver"
+    )
 
     # Choose Chrome Browser
     web_browser = webdriver.Chrome(service=driver_service, options=chrome_options)
     web_browser.implicitly_wait(4)
     return web_browser
+
+
+# Scraping functions
 
 
 def remove_google_box(browser: webdriver.Chrome):
@@ -85,7 +89,7 @@ def get_freefood(browser: webdriver.Chrome) -> str:
 
 
 def add_prize_name_to_file(prize_name: str):
-    with open("prizes.txt", "a", encoding="utf-8") as file:
+    with open("data/prizes.txt", "a", encoding="utf-8") as file:
         file.write(prize_name + "\n")
 
 
